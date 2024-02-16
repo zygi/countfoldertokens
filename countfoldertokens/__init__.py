@@ -14,6 +14,16 @@ parser.add_argument('--pattern', type=str, required=False, help='pattern to matc
 parser.add_argument('--tokenizer', type=str, default="cl100k_base", help='tokenizer to use')
 parser.add_argument('-q', '--quiet', type=bool, default=False, help='tokenizer to use')
 
+def initializer(tok_name):
+    global enc
+    enc = tiktoken.get_encoding(tok_name)
+    
+def token_count(file):
+    global enc
+    with open(file, "r") as f:
+        text = f.read()
+    return len(enc.encode(text))
+
 def main():
     args = parser.parse_args()
     folder = args.folder
@@ -22,15 +32,6 @@ def main():
     # get file tree recursively
     files = list(pathlib.Path(folder).glob("**/*" if args.pattern is None else args.pattern))
     
-    def initializer(tok_name):
-        global enc
-        enc = tiktoken.get_encoding(tok_name)
-        
-    def token_count(file):
-        global enc
-        with open(file, "r") as f:
-            text = f.read()
-        return len(enc.encode(text))
     
     with concurrent.futures.ProcessPoolExecutor(initializer=initializer, initargs=(args.tokenizer,)) as executor:
         context = contextlib.nullcontext() if args.quiet else tqdm.tqdm(total=len(files))
