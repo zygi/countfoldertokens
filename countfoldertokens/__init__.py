@@ -31,14 +31,17 @@ def token_count(file):
 
 def filter_gitignore(start_folder, files):
     import git
-    repo = git.Repo(start_folder, search_parent_directories=True)
-    ignored = set(repo.ignored(files))
-    # print(ignored)
-    # print([str(f) for f in files])
-    notignored = {f for f in files if str(f) not in ignored}
-    repo.close()
-    return notignored
-    
+    try:
+        repo = git.Repo(start_folder, search_parent_directories=True)
+        ignored = set(repo.ignored(files))
+        # print(ignored)
+        # print([str(f) for f in files])
+        notignored = {f for f in files if str(f) not in ignored}
+        repo.close()
+        return notignored
+    except git.InvalidGitRepositoryError:
+        return files
+
 def main():
     args = parser.parse_args()
     folder = args.folder
@@ -48,7 +51,6 @@ def main():
     files = list(e for e in pathlib.Path(folder).glob("**/*" if args.pattern is None else args.pattern) if e.is_file())
     
     if args.respect_gitignore:
-        files = filter_gitignore(folder, files)
         # also filter out .git directories
         files = [f for f in files if not ".git" in f.parts and f.name != ".gitignore"]
     
