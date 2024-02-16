@@ -12,7 +12,7 @@ parser = argparse.ArgumentParser(description='Count tokens in a folder')
 parser.add_argument('folder', type=str, help='folder to count tokens in')
 parser.add_argument('--pattern', type=str, required=False, help='Pattern to match files against.')
 parser.add_argument('--tokenizer', type=str, default="cl100k_base", help='Tokenizer to use. Any tokenizer from the `tiktoken` package can be used.')
-parser.add_argument('--progress', action=argparse.BooleanOptionalAction, default=True, help='Show a progress bar. Default: True')
+parser.add_argument('--progress-bar', action=argparse.BooleanOptionalAction, default=True, help='Show a progress bar. Default: True')
 parser.add_argument('--respect-gitignore', action=argparse.BooleanOptionalAction, default=True, help='Respect .gitignore files. Default: True')
 parser.add_argument('--verbose', action=argparse.BooleanOptionalAction, help='Print information about processed files. Default: False')
 
