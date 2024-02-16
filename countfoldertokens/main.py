@@ -14,7 +14,7 @@ parser.add_argument('--pattern', type=str, required=False, help='pattern to matc
 parser.add_argument('--tokenizer', type=str, default="cl100k_base", help='tokenizer to use')
 parser.add_argument('-q', '--quiet', type=bool, default=False, help='tokenizer to use')
 
-if __name__ == "__main__":
+def main():
     args = parser.parse_args()
     folder = args.folder
     assert isinstance(folder, str)
