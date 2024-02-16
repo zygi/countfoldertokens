@@ -56,7 +56,7 @@ def main():
         files = [f for f in files if not ".git" in f.parts and f.name != ".gitignore"]
     
     with concurrent.futures.ProcessPoolExecutor(initializer=initializer, initargs=(args.tokenizer,)) as executor:
-        context = tqdm.tqdm(total=len(files)) if args.progress else contextlib.nullcontext()
+        context = tqdm.tqdm(total=len(files)) if args.progress_bar else contextlib.nullcontext()
         with context as pbar:
             futures = {executor.submit(token_count, file): file for file in files}
             tok_counts = []
@@ -64,7 +64,7 @@ def main():
                 filename, tok_count = future.result()
                 if tok_count is not None:
                     tok_counts.append(tok_count)
-                if args.progress:
+                if args.progress_bar:
                     pbar.update(1)
                 if args.verbose:
                     print(f"{filename}: {tok_count}")
