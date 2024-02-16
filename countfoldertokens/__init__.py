@@ -10,11 +10,11 @@ import contextlib
 # set up cli arguments
 parser = argparse.ArgumentParser(description='Count tokens in a folder')
 parser.add_argument('folder', type=str, help='folder to count tokens in')
-parser.add_argument('--pattern', type=str, required=False, help='pattern to match files against')
-parser.add_argument('--tokenizer', type=str, default="cl100k_base", help='tokenizer to use')
-parser.add_argument('-p', '--progress', action=argparse.BooleanOptionalAction, default=True, help='show a progress bar')
-parser.add_argument('--respect-gitignore', action=argparse.BooleanOptionalAction, default=True, help='respect .gitignore files')
-parser.add_argument('-v', '--verbose', action=argparse.BooleanOptionalAction, help='print information about processed files')
+parser.add_argument('--pattern', type=str, required=False, help='Pattern to match files against.')
+parser.add_argument('--tokenizer', type=str, default="cl100k_base", help='Tokenizer to use. Any tokenizer from the `tiktoken` package can be used.')
+parser.add_argument('--progress', action=argparse.BooleanOptionalAction, default=True, help='Show a progress bar. Default: True')
+parser.add_argument('--respect-gitignore', action=argparse.BooleanOptionalAction, default=True, help='Respect .gitignore files. Default: True')
+parser.add_argument('--verbose', action=argparse.BooleanOptionalAction, help='Print information about processed files. Default: False')
 
 def initializer(tok_name):
     global enc
