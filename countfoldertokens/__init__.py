@@ -30,7 +30,7 @@ def main():
     assert isinstance(folder, str)
     
     # get file tree recursively
-    files = list(pathlib.Path(folder).glob("**/*" if args.pattern is None else args.pattern))
+    files = list(e for e in pathlib.Path(folder).glob("**/*" if args.pattern is None else args.pattern) if e.is_file())
     
     
     with concurrent.futures.ProcessPoolExecutor(initializer=initializer, initargs=(args.tokenizer,)) as executor:
