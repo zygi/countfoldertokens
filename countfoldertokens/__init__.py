@@ -51,6 +51,7 @@ def main():
     files = list(e for e in pathlib.Path(folder).glob("**/*" if args.pattern is None else args.pattern) if e.is_file())
     
     if args.respect_gitignore:
+        files = filter_gitignore(folder, files)
         # also filter out .git directories
         files = [f for f in files if not ".git" in f.parts and f.name != ".gitignore"]
     
