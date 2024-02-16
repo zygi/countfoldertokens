@@ -9,3 +9,6 @@ dependencies = [
   "tiktoken",
   "tqdm"
 ]
+
+[project.scripts]
+countfoldertokens = "countfoldertokens:main"
