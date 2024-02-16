@@ -7,7 +7,8 @@ name = "countfoldertokens"
 version = "0.1.0"
 dependencies = [
   "tiktoken",
-  "tqdm"
+  "tqdm",
+  "GitPython"
 ]
 
 [project.scripts]
