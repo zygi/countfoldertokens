@@ -11,4 +11,4 @@ dependencies = [
 ]
 
 [project.scripts]
-countfoldertokens = "countfoldertokens:main"
+countfoldertokens = "countfoldertokens.main:main"
