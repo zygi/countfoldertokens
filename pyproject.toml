@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "countfoldertokens"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
   "tiktoken",
   "tqdm",
@@ -13,3 +13,4 @@ dependencies = [
 
 [project.scripts]
 countfoldertokens = "countfoldertokens:main"
+counttokens = "countfoldertokens.counttokens:main"
